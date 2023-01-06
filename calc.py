@@ -9,43 +9,9 @@ def addition(cond):
     cond = [int(x) for x in cond.split('+')]
     return sum(cond)
 
-def subtract(cond):
-    '''
-    subtract
-    -
-    core.calculate.subtract
-    '''
-    cond = cond.replace(" ", "")
-    cond = [int(x) for x in cond.split('-')]
-    return 
-
-def multiply(cond):
-    '''
-    subtract
-    -
-    core.calculate.subtract
-    '''
-    cond = cond
-
-
 
 def read(target):
     return open(target).read().split('\n')
-
-def whatLine(target, word):
-    '''work, but don't use\n-'''
-    with open(rf'{target}', 'r') as fp:
-        lines = fp.readlines()
-
-        for line in lines:
-            if line.find(word) != -1:
-                return int(lines.index(line))
-
-def condition(given, sample):
-    '''not work as expected\n-'''
-    out = f"' {str(given)} ' in ' '+{sample}+' '"
-    return out
-
 
 out = []
 def output(result):
