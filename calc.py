@@ -70,7 +70,7 @@ def compile(target):
             pass
 
         if ' calculate ' in ' '+object[z]+' ':
-            output(eval(object[z - 1]))
+            output(eval(f'{object[z - 1]}'))
 
         z += 1
         
