@@ -91,4 +91,42 @@ def compile(target):
         z += 1
 
 
-compile("test.math")
+
+object = []
+def instant(input):
+    '''
+    compile
+    -
+    core.compile
+    '''
+
+    object.append(input)
+    z = 0
+
+    translate(z, object)
+    while z < len(object):
+
+        if 'sin' in object:
+            pass
+
+        if (' calculate ' in ' '+object[z]+' ') or (' calc ' in ' '+object[z]+' '):
+            output(eval(f'{object[z - 1]}'))
+
+        z += 1
+
+    if z == len(object):
+        z = 0
+
+    while z < len(out):
+        print(out[z])
+        z += 1
+        object.clear()
+        out.clear()
+
+while True:
+    try:
+        x = input('> ')
+        instant(x)
+
+    except IndexError or ValueError:
+        pass
