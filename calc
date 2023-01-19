@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import math
 
 def addition(cond):
     '''
@@ -16,47 +16,55 @@ def addition(cond):
 def read(target):
     return list(filter(None, open(target).read().split('\n')))
 
-def translate(z, object):
-    '''
-    translate
-    ---
-    core.translate
-    '''
-    while z < len(object):
 
-        q = 0
+class fx:
+    @staticmethod
+    def trigonometry(object):
+        object = [x.replace('sin', 'math.sin') for x in object]
+        object = [x.replace('cos', 'math.cos') for x in object]
+        object = [x.replace('tan', 'math.tan') for x in object]
+        return object
 
-        try:
-            while q < len(object[z]):
-                i = 0
+    @staticmethod
+    def translate(object, z):
+        '''
+        translate
+        ---
+        core.translate
+        '''
 
-                try:
-                    place = [n for n in range(len(object[z])) if object[z][n:n + 2] == ')(']
-                    object[z] = f'{object[z][:place[q] + 1]}*{object[z][place[q] + 1:]}'
+        while z < len(object):
+            q = 0
 
-                except IndexError:
-                    pass
+            try:
+                while q < len(object[z]):
+                    i = 0
 
-
-                while i < 10:
                     try:
-                        place = [n for n in range(len(object[z])) if object[z][n:n + 2] == f'{i}(']
-                        object[z] = f'{object[z][:place[q] + 1]}*{object[z][place[q] + 1:]}'
-
-                        place = [n for n in range(len(object[z])) if object[z][n:n + 2] == f'){i}']
+                        place = [n for n in range(len(object[z])) if object[z][n:n + 2] == ')(']
                         object[z] = f'{object[z][:place[q] + 1]}*{object[z][place[q] + 1:]}'
 
                     except IndexError:
                         pass
 
-                    i += 1
-                q += 1
-                z += 1
 
-        except IndexError:
-            pass
+                    while i < 10:
+                        try:
+                            place = [n for n in range(len(object[z])) if object[z][n:n + 2] == f'{i}(']
+                            object[z] = f'{object[z][:place[q] + 1]}*{object[z][place[q] + 1:]}'
 
+                            place = [n for n in range(len(object[z])) if object[z][n:n + 2] == f'){i}']
+                            object[z] = f'{object[z][:place[q] + 1]}*{object[z][place[q] + 1:]}'
 
+                        except IndexError:
+                            pass
+
+                        i += 1
+                    q += 1
+                    z += 1
+
+            except IndexError:
+                pass
 
 out = []
 def output(result):
@@ -73,11 +81,10 @@ def compile(target):
     object = read(target)
     z = 0
 
-    translate(z, object)
+    #fx.translate(object, z)
+    #object = fx.trigonometry(object)
+
     while z < len(object):
-        
-        if 'sin' in object:
-            pass
 
         if (' calculate ' in ' '+object[z]+' ') or (' calc ' in ' '+object[z]+' '):
             output(eval(f'{object[z - 1]}'))
@@ -92,7 +99,6 @@ def compile(target):
         z += 1
 
 
-
 object = []
 def instant(input):
     '''
@@ -100,16 +106,14 @@ def instant(input):
     -
     core.compile
     '''
-
+    global object
     object.append(input)
     z = 0
 
-    translate(z, object)
+    fx.translate(object, z)
+    object = fx.trigonometry(object)
+
     while z < len(object):
-
-        if 'sin' in object:
-            pass
-
         if (' calculate ' in ' '+object[z]+' ') or (' calc ' in ' '+object[z]+' '):
             output(eval(f'{object[z - 1]}'))
 
@@ -124,10 +128,22 @@ def instant(input):
         object.clear()
         out.clear()
 
-while True:
+
+live = 1
+written = 0
+
+while live == 1:
     try:
         x = input('> ')
         instant(x)
 
     except IndexError or ValueError:
         pass
+
+    except NameError:
+        print('No value returned')
+
+
+while written == 1:
+    compile('test.math')
+    break
