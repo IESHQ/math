@@ -3,7 +3,7 @@
   <h1 align="center">Math</h1>
 </p>
 
-Math is an open, human-readable script-language type compute language to math.
+<p align="center">Math is an open, human-readable script-language type compute language to math.</h1>
 
 ## Architecture
 It's a secret, for now.
