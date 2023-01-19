@@ -3,3 +3,7 @@ calculate
 
 23+534+sin(20)+tan(90)+cos(30)
 calc
+
+to single:
+tan(30)
+calc
