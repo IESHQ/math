@@ -29,12 +29,16 @@ class fx:
         object = [x.replace('tan', 'math.tan') for x in object]
         return object
 
+    def trignometricFunctionAuto(object):
+        if (f'sin{i}' in object[z - 1]):
+            object = [x.replace('sin', 'math.sin') for x in object]
+
     @staticmethod
-    def translate(object, z):
+    def translate_legacy(object, z):
         '''
-        translate
+        translate <- legacy
         ---
-        core.fx.translate
+        core.fx.translate_legacy
         '''
 
         while z < len(object):
@@ -69,6 +73,28 @@ class fx:
 
             except IndexError:
                 pass
+
+    @staticmethod
+    def translate(object, z):
+        '''
+        translate
+        ---
+        core.fx.translate
+        '''
+        for i in range(10):
+            object = [x.replace(f'{i}(', f'{i}*(') for x in object]
+            object = [x.replace(f'){i}', f')*{i}') for x in object]
+
+            object = [x.replace(f'{i}sin', f'{i}*sin') for x in object]
+            object = [x.replace(f'{i}cos', f'{i}*cos') for x in object]
+            object = [x.replace(f'{i}tan', f'{i}*tan') for x in object]
+
+        object = [x.replace(f'^', f'**') for x in object]
+
+        return object
+
+    def accuFloat():
+        pass
 
 
 out = []
@@ -116,15 +142,15 @@ def instant(input):
     object.append(input)
     z = 0
 
-    fx.translate(object, z)
-    object = fx.trigonometry(object)
-
     while z < len(object):
-
+        
         if (' illegalInputTestString ' in ' '+object[z]+' ') or (' a@a.com ' in ' '+object[z]+' '):
             output(eval(f'{object[z - 1]}'))
 
         if 'calc' == object[z]:
+            object = fx.translate(object, z)
+            object = fx.trigonometry(object)
+            
             output(eval(f'{object[z - 1]}'))
 
         z += 1
@@ -150,7 +176,7 @@ while live == 1:
             instant(x)
 
     except IndexError or ValueError:
-        pass
+        print("Fix inserted formula")
 
     except NameError:
         object.clear()
