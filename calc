@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import math
+import math, re
 
 def addition(cond):
     '''
@@ -94,7 +94,11 @@ class fx:
         return object
 
     def accuFloat():
-        pass
+        rePattern = r'[-+]? (?: (?: \d* \. \d+ ) | (?: \d+ \.? ) )(?: [Ee] [+-]? \d+ ) ?'
+        rx = re.compile(rePattern, re.VERBOSE)
+        objet = rx.findall(f"{object}")
+        for i in range(len(objet)):
+            objet[i]
 
 
 out = []
@@ -166,7 +170,7 @@ def instant(input):
         out.clear()
 
 
-live = 1
+live = 0
 written = 0
 
 while live == 1:
@@ -186,3 +190,6 @@ while live == 1:
 while written == 1:
     compile('test.math')
     break
+
+
+print(str(fx.accuFloat))
