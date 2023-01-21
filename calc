@@ -98,7 +98,7 @@ class fx:
         rx = re.compile(rePattern, re.VERBOSE)
         objet = rx.findall(f"{object}")
         for i in range(len(objet)):
-            objet[i]
+            rx.sub(f'{objet[i]}', f'{objet[i]}')
 
 
 out = []
