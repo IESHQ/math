@@ -170,7 +170,7 @@ def instant(input):
         out.clear()
 
 
-live = 0
+live = 1
 written = 0
 
 while live == 1:
