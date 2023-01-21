@@ -7,7 +7,6 @@ def addition(cond):
     -
     core.calculate.addition
     '''
-    #eval(cond)
     cond = cond.replace(" ", "")
     cond = [int(x) for x in cond.split('+')]
     return sum(cond)
@@ -20,6 +19,11 @@ def read(target):
 class fx:
     @staticmethod
     def trigonometry(object):
+        '''
+        trigonometry function set
+        ---
+        core.fx.trigonometry
+        '''
         object = [x.replace('sin', 'math.sin') for x in object]
         object = [x.replace('cos', 'math.cos') for x in object]
         object = [x.replace('tan', 'math.tan') for x in object]
@@ -30,7 +34,7 @@ class fx:
         '''
         translate
         ---
-        core.translate
+        core.fx.translate
         '''
 
         while z < len(object):
@@ -65,6 +69,7 @@ class fx:
 
             except IndexError:
                 pass
+
 
 out = []
 def output(result):
@@ -104,8 +109,9 @@ def instant(input):
     '''
     compile
     -
-    core.compile
+    core.instant
     '''
+
     global object
     object.append(input)
     z = 0
@@ -114,14 +120,15 @@ def instant(input):
     object = fx.trigonometry(object)
 
     while z < len(object):
+
         if (' illegalInputTestString ' in ' '+object[z]+' ') or (' a@a.com ' in ' '+object[z]+' '):
             output(eval(f'{object[z - 1]}'))
 
         if 'calc' == object[z]:
             output(eval(f'{object[z - 1]}'))
 
-
         z += 1
+
 
     if z == len(object):
         z = 0
@@ -139,12 +146,14 @@ written = 0
 while live == 1:
     try:
         x = input('> ')
-        instant(x)
+        if x:
+            instant(x)
 
     except IndexError or ValueError:
         pass
 
     except NameError:
+        object.clear()
         print('No value returned')
 
 
