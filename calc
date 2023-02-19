@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import math, re
+import math, re, decimal
 
 def addition(cond):
     '''
@@ -93,12 +93,18 @@ class fx:
 
         return object
 
-    def accuFloat():
-        rePattern = r'[-+]? (?: (?: \d* \. \d+ ) | (?: \d+ \.? ) )(?: [Ee] [+-]? \d+ ) ?'
-        rx = re.compile(rePattern, re.VERBOSE)
-        objet = rx.findall(f"{object}")
+    @staticmethod
+    def accuFloat(object):
+        object = ['12.121asdasda']
+        objet0 = re.findall(r'\d+\.?\d*', str(object))
+        print(object); print(objet0)
+        objet = [decimal.Decimal(x) for x in re.findall(r'\d+\.?\d*', str(object))]
+        print(objet)
+
         for i in range(len(objet)):
-            rx.sub(f'{objet[i]}', f'{objet[i]}')
+            object = [x.replace(f'{objet0[i]}', f'{objet[i]}') for x in object]
+            print(object); print(i); print(len(objet))
+        return object
 
 
 out = []
@@ -170,7 +176,7 @@ def instant(input):
         out.clear()
 
 
-live = 1
+live = 0
 written = 0
 
 while live == 1:
@@ -192,4 +198,4 @@ while written == 1:
     break
 
 
-print(str(fx.accuFloat))
+print(str(fx.accuFloat(123)))
